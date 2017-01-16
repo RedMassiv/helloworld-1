@@ -5,15 +5,15 @@ public class arrays {
 		// TODO Auto-generated method stub
 		//int[] teilnehmer1 = new int[20];
 		
-		int[] teilnehmer1 = {1,3,5,762,1,243,5,345,1,45,34,6,123,43,578887,16};
-		teilnehmer1[1]=1234;
+		/*int[] teilnehmer1 = {1,3,5,762,1,243,5,345,1,45,34,6,123,43,578887,16};
+		teilnehmer1[1]=1234; */
 		/*for (int i=0; i<teilnehmer1.length; i++){
 			System.out.println(teilnehmer1[i]);
 		} */
-		for (int element: teilnehmer1){
+		/*for (int element: teilnehmer1){
 			System.out.println(element);
 		}
-		
+		*/
 		int[][] matrix = new int[3][3];
 		
 		matrix[0][0] = 1;
@@ -27,9 +27,9 @@ public class arrays {
 		matrix[2][2] = 9;
 
 		
-		for (int i=0; i<3; i++){
-			for (int b=0; b<3; i++){
-				System.out.println(matrix[i][b]);
+		for (int i=0; i<=2; i++){
+			for (int b=0; b<=2; i++){
+				System.out.println(matrix[b][i]);
 			}
 			
 		}
