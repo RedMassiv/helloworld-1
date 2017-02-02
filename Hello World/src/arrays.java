@@ -27,12 +27,35 @@ public class arrays {
 		matrix[2][2] = 9;
 
 		
-		for (int i=0; i<=2; i++){
-			for (int b=0; b<=2; i++){
-				System.out.println(matrix[b][i]);
+		for (int i=0; i<matrix.length; i++){
+			for (int b=0; b<matrix.length; b++){
+				//System.out.println(matrix[i][b]);
 			}
-			
 		}
+		
+		int zähler = 0;
+		int[][][] matritze = new int[3][3][3];
+		for (int i=0; i<matritze.length; i++){
+			for (int b=0; b<matritze.length; b++){
+				for (int c=0; c<matritze.length; c++){
+					matritze[i][b][c] = zähler;
+					zähler++;
+
+				}
+			}
+		}
+		for (int i=0; i<matritze.length; i++){
+			System.out.println();
+			for (int b=0; b<matritze.length; b++){
+				System.out.print("(");
+				for (int c=0; c<matritze.length; c++){
+					System.out.print("["+matritze[i][b][c]+"]	");
+
+				}
+				System.out.print(")			");
+			}
+		}
+		
 	
 	}
  
