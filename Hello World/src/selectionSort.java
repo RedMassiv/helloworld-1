@@ -20,6 +20,6 @@ public class selectionSort {
 	}
 	public static int findMinimum(int[] array, int startIndex, int endIndex) {
 		for 
-		return 
+		return //1
 	}
 }
