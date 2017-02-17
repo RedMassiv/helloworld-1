@@ -45,7 +45,7 @@ static int speicherzugriffe;
 	}
 	
 	
-	public static int findMinimum(int[] array, int startIndex, int endIndex) {
+	public static int findMinimum(int[] array, int startIndex, int endIndex) { //find minimum
 		int currentMinimum = array[startIndex];
 		int position = startIndex;
 		for (int i=startIndex;i<(endIndex);i++){
@@ -59,14 +59,14 @@ static int speicherzugriffe;
 	}
 	
 	
-	public static void output(int[] array){
+	public static void output(int[] array){  //output methode
 		for (int c=0; c<array.length; c++){
 			System.out.print("["+array[c]+"]");
 		}
 		System.out.print("\n");
 	}
 	
-	public static void fill(int[] array){
+	public static void fill(int[] array){  //fill array with random numbers
 		for (int c=0; c<array.length; c++){
 			Random rand = new Random(); 
 			array[c] = rand.nextInt(101) - 50;
