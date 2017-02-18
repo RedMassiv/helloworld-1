@@ -1,13 +1,34 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Random;
 //import java.io.*;
 
 public class selectionSort {
 static int berechnungen;
 static int speicherzugriffe;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		//class GetUserInput{}
-		int[] list = new int[50];  	 //array definieren
-		fill(list);
+		System.out.print("Stellen den Arrays: ");
+		BufferedReader r;
+		r=new BufferedReader(new InputStreamReader(System.in));
+		String aLine=r.readLine();
+		int n=Integer.parseInt(aLine);
+		
+		System.out.print("Anfang der Zufallszahlen: ");
+		BufferedReader c;
+		c=new BufferedReader(new InputStreamReader(System.in));
+		String bLine=c.readLine();
+		int l=Integer.parseInt(bLine);
+		
+		System.out.print("Ende der Zufallszahlen: ");
+		BufferedReader d;
+		d=new BufferedReader(new InputStreamReader(System.in));
+		String cLine=d.readLine();
+		int m=Integer.parseInt(cLine);
+		
+		int[] list = new int[n];  	 //array definieren
+		fill(list, l, m);
 		System.out.print("Das unsortierte Array: \n");output(list);    //array anzeigen
 		System.out.print("Stellen den Arrays: " + list.length + "\n");
 		selectionSortMethode(list);
@@ -66,10 +87,10 @@ static int speicherzugriffe;
 		System.out.print("\n");
 	}
 	
-	public static void fill(int[] array){  //fill array with random numbers
+	public static void fill(int[] array,int start,int ende){  //fill array with random numbers
 		for (int c=0; c<array.length; c++){
 			Random rand = new Random(); 
-			array[c] = rand.nextInt(101) - 50;
+			array[c] = rand.nextInt(ende+1-start) + start;
 		}
 		System.out.print("\n");
 	}
@@ -88,22 +109,4 @@ static int speicherzugriffe;
 		}
 		return sorted;
 	}
-	
-	/*public static int GetUserInput(){ 
-		//the data that will be entered by the user String name; 
-		//an instance of the BufferedReader class 
-		//will be used to read the data 
-		BufferedReader reader; 
-		//specify the reader variable 
-		//to be a standard input buffer 
-		reader = new BufferedReader(new InputStreamReader(System.in)); 
-		//ask the user for their name 
-		System.out.print("What is your name? "); 
-		//read the data entered by the user using 
-		//the readLine() method of the BufferedReader cimport java.io.*;lass 
-		//and store the value in the name variable 
-		name = reader.readLine(); 
-		return name;
-		} 
-	} */
 }
