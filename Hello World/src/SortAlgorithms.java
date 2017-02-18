@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 //import java.io.*;
 
-public class selectionSort {
+public class SortAlgorithms {
 static int berechnungen;
 static int speicherzugriffe;
 	public static void main(String[] args) throws IOException {
