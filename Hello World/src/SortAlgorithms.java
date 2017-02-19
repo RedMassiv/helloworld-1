@@ -37,7 +37,7 @@ static int speicherzugriffe;
 		
 		return list;
 	}
-	
+	//langeweile
 	
 	public static void selectionSortMethode(int[] array){  //SelectionSort Methode
 		
