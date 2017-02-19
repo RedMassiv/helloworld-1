@@ -126,17 +126,18 @@ static int speicherzugriffe;
 		return sorted;
 	}
 	
-	public static int getUserInput(String frage, Scanner Scanner) throws IOException{  //user input auslesen
-		/*System.out.print(frage + " ");
+	public static int getUserInput(String frage) throws IOException{  //user input auslesen
+		System.out.print(frage + " ");
 		BufferedReader r;
 		r=new BufferedReader(new InputStreamReader(System.in));
-		String aLine=r.readLine();*/
-		Scanner scanner = (Scanner);
+		String aLine=r.readLine();
+		return Integer.parseInt(aLine);
+		/*Scanner scanner;
 		do{
 			scanner = new Scanner(System.in);
 		}
 		while (!scanner.hasNextInt());
-		return Integer.parseInt(scanner);
+		return scanner;*/
 	}
 	
 	public static void ladeBalken(int geschafft, int vonMaximum){
@@ -144,7 +145,6 @@ static int speicherzugriffe;
 		int balken = 50;
 		System.out.print("[");
 		for (int i=0; i<prozent ; i++) {
-		
 			System.out.print("=");
 			i=i+1;
 			balken=balken-1;
