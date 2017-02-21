@@ -1,18 +1,24 @@
+//import java.io.BufferedReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
-//import java.io.*;
 
 public class SortAlgorithms {
 static int berechnungen;
 static int speicherzugriffe;
 	public static void main(String[] args) throws IOException {
-		selectionSortMethode(prepareArray()); //selection sort anwenden
+		int[] selectionSort = prepareArray();
+		int[] bubbleSort = Arrays.copyOf(selectionSort, selectionSort.length);
+		//outputArray(bubbleSort);  //test ob der clonvorgang gelückt ist
+		//if (check2ndLower(selectionSort,1,2)){ selectionSort[3]=10000; }  //der test ob die Methode geht
+		//turnArray(selectionSort);  //ebenso der test ob die methode geht
+		bubbleSortMethode(bubbleSort);
+		selectionSortMethode(selectionSort); //selection sort anwenden
 	}
 	
-	public static int[] prepareArray() throws IOException{
+	public static int[] prepareArray() throws IOException{   //ein Array erzeugen
 		int n = getUserInput("Stellen den Arrays:");
 
 		while (n<0){
@@ -38,6 +44,57 @@ static int speicherzugriffe;
 		return list;
 	}
 	//langeweile
+	public static void bubbleSortMethode(int[] array){
+		for (int wieVieleSortiert=0; wieVieleSortiert<=array.length-1;wieVieleSortiert++){
+			//System.out.println(wieVieleSortiert);
+			if (array.length<20){		//bei kleinen arrays die einzelnen schritte anzeigen
+				outputArray(array);
+			} else {
+				ladeBalken(wieVieleSortiert,array.length);		//bei großen einen ladebalken
+			}
+			for (int anWelcherStelleTauschen=0; anWelcherStelleTauschen<array.length-1-wieVieleSortiert;anWelcherStelleTauschen++){		//so oft alle einmal durchtauschen, wie das array lang ist
+				//System.out.println(anWelcherStelleTauschen);
+				//outputArray(array);
+				if (anWelcherStelleTauschen<array.length-2){					//wenn es sich nicht um die letzten 2 werte handelt, ganz normal checken und tauschen
+					if (check2ndLower(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1)){
+						swap(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1);
+						//outputArray(array);
+					}
+				} else {
+					if (check2ndLower(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1)){   //wenn die letzten beiden schon stimmen, dann kann man sich einmal durchrechnen sparen
+						swap(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1);
+						//outputArray(array);
+					} else {
+						wieVieleSortiert=wieVieleSortiert+1;
+						System.out.println("Letzter Wert übersprungen, da schon sortiert");
+					}
+				}
+				
+			}
+		}
+		outputArray(array);  			//das sortierte array anzeigen
+		
+		if(isSorted(array)){			//checken ob das array auch tatsächlich soriert ist
+			System.out.print("Das Array ist sortiert!" + "\n");
+		} else {
+			System.out.print("Das Array ist noch nicht sortiert!" + "\n");
+		}
+		System.out.print("Speicherzugriffe: "+speicherzugriffe + "\n");		//Statistiken zeigen
+		System.out.print("Berechnungen: " + berechnungen + "\n");
+		berechnungen = 0;
+		speicherzugriffe = 0;
+		
+	}
+	
+	public static boolean check2ndLower (int[] array, int stelle1, int stelle2){
+		berechnungen++;
+		if (array[stelle1]>array[stelle2]){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 	public static void selectionSortMethode(int[] array){  //SelectionSort Methode
 		
@@ -72,6 +129,8 @@ static int speicherzugriffe;
 		
 		System.out.print("Speicherzugriffe: "+speicherzugriffe + "\n");		//Statistiken zeigen
 		System.out.print("Berechnungen: " + berechnungen + "\n");
+		berechnungen = 0;
+		speicherzugriffe = 0;
 	}
 	
 	
@@ -138,6 +197,16 @@ static int speicherzugriffe;
 		}
 		while (!scanner.hasNextInt());
 		return scanner;*/
+	}
+	public static void turnArray(int[] array){
+		int[] turnedArray = new int [array.length];
+		int stelleRück;
+		for (int i=0 ; i<array.length; i++){
+			stelleRück = array.length-1-i;
+			turnedArray[stelleRück] = array[i];
+		}
+		array = turnedArray;
+		outputArray(array);
 	}
 	
 	public static void ladeBalken(int geschafft, int vonMaximum){
