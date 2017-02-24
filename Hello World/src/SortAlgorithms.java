@@ -12,9 +12,11 @@ static int speicherzugriffe;
 		int[] selectionSort = prepareArray();
 		int[] bubbleSort = Arrays.copyOf(selectionSort, selectionSort.length);
 		int[] shellSort = Arrays.copyOf(selectionSort, selectionSort.length);
+		int[] mergeSort = Arrays.copyOf(selectionSort, selectionSort.length);
 		//outputArray(bubbleSort);  //test ob der clonvorgang gelückt ist
 		//if (check2ndLower(selectionSort,1,2)){ selectionSort[3]=10000; }  //der test ob die Methode geht
 		//turnArray(selectionSort);  //ebenso der test ob die methode geht
+		mergeSortMethod(mergeSort);
 		shellsortMethode(shellSort,shellSort.length);
 		selectionSortMethode(selectionSort); 				//selection sort anwenden
 		bubbleSortMethode(bubbleSort);					
@@ -45,6 +47,21 @@ static int speicherzugriffe;
 		//outputArray(list);    //array anzeigen
 		
 		return list;
+	}
+	
+	public static void mergeSortMethod(int[] array){
+		System.out.println("---DualPivotQuickSort/MergeSort Methode---");
+		long startTime = System.nanoTime();
+		Arrays.sort(array);
+		long estimatedTime = System.nanoTime() - startTime;
+		if(isSorted(array)){								//checken ob das array auch tatsächlich soriert ist
+			System.out.print("Das Array ist sortiert!" + "\n");
+		} else {
+			System.out.print("Das Array ist noch nicht sortiert!" + "\n");
+		}
+		
+		System.out.println(array.length + " Stellen sortiert in: " + estimatedTime/1000 + "qs");
+		
 	}
 	//langeweile
 	public static void bubbleSortMethode(int[] array){
@@ -79,6 +96,7 @@ static int speicherzugriffe;
 				
 			}
 		}
+		long estimatedTime = System.nanoTime() - startTime;
 		//outputArray(array);  								//das sortierte array anzeigen
 		
 		if(isSorted(array)){								//checken ob das array auch tatsächlich soriert ist
@@ -90,7 +108,7 @@ static int speicherzugriffe;
 		System.out.print("Berechnungen: " + berechnungen + "\n");
 		berechnungen = 0;
 		speicherzugriffe = 0;
-		long estimatedTime = System.nanoTime() - startTime;
+		
 		System.out.println(array.length + " Stellen sortiert in: " + estimatedTime/1000 + "qs");
 		
 	}
@@ -113,13 +131,15 @@ static int speicherzugriffe;
 	            j = einzusortierendeStelle;
 	            while (j >= aktuelleSpalten && array[j-aktuelleSpalten] > einzusortierenderWert){
 	                array[j] = array[j-aktuelleSpalten];
-	                berechnungen++;
+		    		speicherzugriffe++;
 	                j = j - aktuelleSpalten;									//wer soll das bitte verstehen
 	            }
+	            berechnungen++;
 	            array[j] = einzusortierenderWert;
 	    		speicherzugriffe++;
 	        }
 	    }
+	    long estimatedTime = System.nanoTime() - startTime;
 	    //outputArray(array);
 	    if(isSorted(array)){								//checken ob das array auch tatsächlich soriert ist
 			System.out.print("Das Array ist sortiert!" + "\n");
@@ -130,7 +150,7 @@ static int speicherzugriffe;
 		System.out.print("Berechnungen: " + berechnungen + "\n");
 		berechnungen = 0;
 		speicherzugriffe = 0;
-		long estimatedTime = System.nanoTime() - startTime;
+		
 		System.out.println(array.length + " Stellen sortiert in: " + estimatedTime/1000 + "qs");
 	}
 
@@ -170,7 +190,7 @@ static int speicherzugriffe;
 				ladeBalken(i,array.length);					//bei großen einen ladebalken
 			}*/
 		}
-		
+		long estimatedTime = System.nanoTime() - startTime;
 		//outputArray(array);  								//das sortierte array anzeigen
 		
 		if(isSorted(array)){								//checken ob das array auch tatsächlich soriert ist
@@ -183,7 +203,7 @@ static int speicherzugriffe;
 		System.out.print("Berechnungen: " + berechnungen + "\n");
 		berechnungen = 0;
 		speicherzugriffe = 0;
-		long estimatedTime = System.nanoTime() - startTime;
+		
 		System.out.println(array.length + " Stellen sortiert in: " + estimatedTime/1000 + "qs");
 	}
 	
