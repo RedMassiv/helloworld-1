@@ -10,16 +10,14 @@ static int berechnungen;
 static int speicherzugriffe;
 	public static void main(String[] args) throws IOException {
 		int[] selectionSort = prepareArray();
-		int[] bubbleSort = Arrays.copyOf(selectionSort, selectionSort.length);
+		int[] bubbleSort = Arrays.copyOf(selectionSort, selectionSort.length);			//das array clonen, damit jeder algorithmus das unsortierte array sortiert
 		int[] shellSort = Arrays.copyOf(selectionSort, selectionSort.length);
 		int[] mergeSort = Arrays.copyOf(selectionSort, selectionSort.length);
-		//outputArray(bubbleSort);  //test ob der clonvorgang gelückt ist
-		//if (check2ndLower(selectionSort,1,2)){ selectionSort[3]=10000; }  //der test ob die Methode geht
-		//turnArray(selectionSort);  //ebenso der test ob die methode geht
 		mergeSortMethod(mergeSort);
 		shellsortMethode(shellSort,shellSort.length);
 		selectionSortMethode(selectionSort); 				//selection sort anwenden
-		bubbleSortMethode(bubbleSort);					
+		bubbleSortMethode(bubbleSort);	
+		turnArray(bubbleSort);
 	}
 	
 	public static int[] prepareArray() throws IOException{   				//ein Array erzeugen
@@ -217,42 +215,39 @@ static int speicherzugriffe;
 	
 	
 	public static int findMinimum(int[] array, int startIndex, int endIndex) { 			//find minimum
-		int currentMinimum = array[startIndex];
+		//int currentMinimum = array[startIndex];											
 		int position = startIndex;
-		for (int i=startIndex;i<(endIndex);i++){
-			if(array[i]<currentMinimum){
+		for (int i=startIndex;i<(endIndex);i++){										//f
+			if(array[i]<array[startIndex]){
 				position=i;
-				currentMinimum = array[i];
+				array[startIndex] = array[i];
 				berechnungen++;
 			}
 		}
 		return position;
 	}
 	
-	
 	public static void outputArray(int[] array){  							//output methode
-		for (int c=0; c<array.length; c++){
-			System.out.print("["+array[c]+"]");
+		for (int c=0; c<array.length; c++){									//gehe jede stelle im array durch
+			System.out.print("["+array[c]+"]");								// und zeige den wert in eckigen klammern an
 		}
 		System.out.print("\n");
 	}
 	
 	public static void fill(int[] array,int start,int ende){  				//fill array with random numbers
-		for (int c=0; c<array.length; c++){
-			Random rand = new Random(); 
-			array[c] = rand.nextInt(ende+1-start) + start;
+		for (int c=0; c<array.length; c++){									//für jede stelle des arrays
+			Random rand = new Random(); 									//wird ein wert generiert
+			array[c] = rand.nextInt(ende+1-start) + start;					//zwischen 0 und dem wert in den klammern, und um den anfangswert zu bestimmen werden die zahlen noch mit einem wert addiert
 		}
-		System.out.print("\n");
 	}
 	
 	public static boolean isSorted(int[] array){  							//checken ob das array tatsächlich sortiert ist
-		boolean sorted=true;
+		boolean sorted=true;												
 		int i=0;
-		int endIndex=array.length;
-		//for (int i=0; sorted && i<endIndex; i++){
-		while(sorted && i<endIndex-1){
+		int endIndex=array.length;											
+		while(sorted && i<endIndex-1){										//solange alle werte kleiner sind als der darauffolgende, dann ist alles gut und es wird true zurückgegeben
 			if(array[i]>array[i+1]){
-				sorted=false;
+				sorted=false;												//wenn nicht dann ist das array noch nicht sortiert und es wird false zuzückgegben
 			}
 			i++;
 		}
@@ -260,40 +255,33 @@ static int speicherzugriffe;
 	}
 	
 	public static int getUserInput(String frage) throws IOException{  		//user input auslesen
-		System.out.print(frage + " ");
-		BufferedReader r;
+		System.out.print(frage + " ");										//zeige die übergebene frage an
+		BufferedReader r;													//lese den input aus
 		r=new BufferedReader(new InputStreamReader(System.in));
-		String aLine=r.readLine();
-		return Integer.parseInt(aLine);
-		/*Scanner scanner;
-		do{
-			scanner = new Scanner(System.in);
-		}
-		while (!scanner.hasNextInt());
-		return scanner;*/
+		String aLine=r.readLine();											//
+		return Integer.parseInt(aLine);										//hier wird der imput in einen Integer umgewandelt und zurückgegeben
 	}
-	public static void turnArray(int[] array){
-		int[] turnedArray = new int [array.length];
-		int stelleRück;
+	
+	public static void turnArray(int[] array){								//methode um das gesamte array zu drehen
+		int[] turnedArray = new int [array.length];							//erstelle ein neues leeres array mit derselben länge wie das zu drehende array
 		for (int i=0 ; i<array.length; i++){
-			stelleRück = array.length-1-i;
-			turnedArray[stelleRück] = array[i];
+			turnedArray[array.length-1-i] = array[i];						//gehe in dem vollen array von vorne nach hinten durch und schreibe die Inhalte von hinten anfangend in das leere array
 		}
-		array = turnedArray;
+		array = turnedArray;												//überschreibe das alte, übergebene array mit dem neuen sortierten array
 		outputArray(array);
 	}
 	
-	public static void ladeBalken(int geschafft, int vonMaximum){
-		double prozent = geschafft*100/vonMaximum;
+	public static void ladeBalken(int geschafft, int vonMaximum){			//methode um anzuzeigen wie weit der sortiervorgang schon gerechnet ist
+		double prozent = geschafft*100/vonMaximum;						//berechne die Prozent die schon geschafft sind
 		int balken = 50;
 		System.out.print("[");
-		for (int i=0; i<prozent ; i++) {
+		for (int i=0; i<prozent ; i++) {								//für jede 2% zeichne 1 = als ladebalkenanimation
 			System.out.print("=");
 			i=i+1;
 			balken=balken-1;
 		}
 
-		while (balken>0) {
+		while (balken>0) {												//für alle restlichen 2% zeichne ein leerzeichen
 			System.out.print(" ");
 			balken=balken-1;
 		}
