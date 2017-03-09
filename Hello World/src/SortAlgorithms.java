@@ -77,12 +77,13 @@ static int speicherzugriffe;
 			for (int anWelcherStelleTauschen=0; anWelcherStelleTauschen<array.length-1-wieVieleSortiert;anWelcherStelleTauschen++){		//so oft alle einmal durchtauschen, wie das array lang ist
 				//System.out.println(anWelcherStelleTauschen);
 				//outputArray(array);
-				if (anWelcherStelleTauschen<array.length-2){					//wenn es sich nicht um die letzten 2 werte handelt, ganz normal checken und tauschen
+				if (anWelcherStelleTauschen<array.length-1-wieVieleSortiert){					//wenn es sich nicht um die letzten 2 werte handelt, ganz normal checken und tauschen
 					if (check2ndLower(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1)){
 						swap(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1);
 						//outputArray(array);
 					}
 				} else {
+					System.out.println("endedes teilarrays");
 					if (check2ndLower(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1)){   //wenn die letzten beiden schon stimmen, dann kann man sich einmal durchrechnen sparen
 						swap(array,anWelcherStelleTauschen,anWelcherStelleTauschen+1);
 						//outputArray(array);
